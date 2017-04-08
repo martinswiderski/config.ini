@@ -1,0 +1,30 @@
+{
+  "name": "config.ini",
+  "version": "0.0.1",
+  "description": "your .ini files parser with some extras ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinswiderski/config.ini.git"
+  },
+  "keywords": [
+    "ini",
+    "config",
+    "ini",
+    "file",
+    "ini",
+    "parser",
+    "configuration",
+    "linux",
+    "config"
+  ],
+  "author": "Martin Swiderski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martinswiderski/config.ini/issues"
+  },
+  "homepage": "https://github.com/martinswiderski/config.ini#readme"
+}
