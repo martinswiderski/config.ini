@@ -1,3 +1,11 @@
+# IDE
+.idea/
+
+# reports
+reports/junit/*.xml
+reports/eslint/eslint.txt
+reports/coverage/
+
 # Logs
 logs
 *.log
