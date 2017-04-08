@@ -11,5 +11,5 @@ config.ini
 
 Version|Published|By|URL
 --- | --- | --- | ---
-**0.0.1** | **2017-04-08** | `codebloke` | [npm](https://www.npmjs.com/package/jacin)
+**0.0.1** | **2017-04-08** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
 
