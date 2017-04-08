@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/martinswiderski/config.ini/issues"
   },
-  "homepage": "https://github.com/martinswiderski/config.ini#readme"
+  "homepage": "https://github.com/martinswiderski/config.ini#readme",
+  "dependencies": {
+    "bash-color": "0.0.4"
+  }
 }
