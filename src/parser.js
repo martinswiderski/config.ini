@@ -17,15 +17,12 @@ if (!String.prototype.dequote) {
 }
 
 var _i = 0,
+    _defaultEncoding = 'utf-8',
     _ignore = {
         ';': true,
         '#': true
     },
-    _equals = '=',
-    _quotes = {
-        '"': true,
-        '\'': true
-    };
+    fs = require('fs');
 
 function isEmpty(line) {
     return (line.length === 0 || _ignore[line.substr(0, 1)] === true);
@@ -76,13 +73,13 @@ function readline(line) {
             type: 'section',
             key: line.substr((sectionOpen+1), (sectionClose-sectionOpen)-1),
             value: ''
-        }
+        };
     } else {
         out = {
             type: 'item',
             key: line.substr(0, (indexEquals-1)),
             value: line.substr((indexEquals+1), len-(indexEquals+1))
-        }
+        };
     }
     if (out.key.length === 0) {
         out.type = 'empty';
@@ -129,6 +126,10 @@ function Parser(id, parent) {
         _parent = parent,
         _errors = [];
 
+    this.encoding = function() {
+        return _defaultEncoding;
+    };
+
     this.new = function() {
         return new Parser(++_i, _id); // creates child
     };
@@ -137,16 +138,33 @@ function Parser(id, parent) {
         return _id;
     };
 
-    this.parse = function(string) {
+    this.parent = function() {
+        return _parent;
+    };
 
+    this.errors = function() {
+        return JSON.parse(JSON.stringify(_errors));
+    };
+
+    this.parse = function(string) {
+        return _store = parseString(string);
     };
 
     this.load = function(file) {
-
+        try {
+            return _store = parseString(
+                fs.readFileSync(
+                    file,
+                    this.encoding()
+                )
+            );
+        } catch (err) {
+            _errors.push(err.message);
+            return {};
+        }
     };
 
-    this.stringify = function() {
-
+    this.stringify = function(indent, quote) {
     };
 
     /**
