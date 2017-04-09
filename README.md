@@ -13,29 +13,31 @@ Version|Published|By|URL
 --- | --- | --- | ---
 **0.0.2** | **2017-04-08** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
 
-### Use cases
+### How to use it
 
 #### Installation
 
 ```bash
 npm install --save config,ini
 ```
-then inside your code use:
+#### In your code use:
 
 ```javascript 1.8
 var configIni = require('config.ini');
 ```
 
-#### Documentation
+#### <a name="examples"></a>Examples
 
- * Example .ini file format
- * Reading string
- * Reading from a file
- * Output to .ini string (you can save it into a file)
- * I8N Support
+ * [Example .ini file format](#ini)
+ * [Reading string](#string)
+ * [Reading from a file](#file)
+ * [Output to .ini string (you can save it into a file)](#output)
+ * [I8N Support](#i8n)
 
 
-Assuming following `.ini file` structure
+#### <a name="ini"></a>Example format
+
+For all examples below we are assuming following `.ini file` structure
 
 ```bash
 
@@ -67,15 +69,33 @@ multivalue[] = second
 multivalue[] = third
 
 ```
+[&laquo; back to list](#examples)
 
-1. Reading config from an .ini `string` **with sections** <sub>(For section-less feature see: [#2](https://github.com/martinswiderski/config.ini/issues/2))</sub>
+
+#### <a name="string"></a>Reading from a string
+
+Reading config from an .ini `string` **with sections** <sub>(For section-less feature see: [#2](https://github.com/martinswiderski/config.ini/issues/2))</sub>
 
 ```javascript 1.8
 var string = '',
     conf   = configIni.parse(string);
 ```
-2. Reading config from a `file.ini`
+[&laquo; back to list](#examples)
+
+#### <a name="file"></a>Reading from a file
+
+Reading config from a `file.ini`
 
 ```javascript 1.8
 var conf = configIni.load(file);
 ```
+
+[&laquo; back to list](#examples)
+
+#### <a name="output"></a>Output to an .ini string
+
+[&laquo; back to list](#examples)
+
+#### <a name="i8n"></a>I8N Support
+
+[&laquo; back to list](#examples)
