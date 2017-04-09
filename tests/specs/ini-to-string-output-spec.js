@@ -48,7 +48,7 @@ describe('Reads object', function () {
 
     var objToIniString = {
         mysection: {
-            key: "string",
+            key: 'string',
             integer: 1234,
             real: 3.14
         }
