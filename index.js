@@ -1,7 +1,8 @@
 'use strict';
+Object.defineProperty(
+    exports,
+    '__esModule',
+    { value: true }
+);
 
-(function(){
-    module.exports = function (input) {
-        return new (require('./src/parser'));
-    };
-})();
+module.exports = exports.default = require('./src/parser');
