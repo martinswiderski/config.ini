@@ -20,7 +20,7 @@ Version|Published|By|URL
 ```bash
 npm install --save config,ini
 ```
-#### In your code use:
+#### In your code...
 
 ```javascript 1.8
 var configIni = require('config.ini');
@@ -51,9 +51,8 @@ integer = 1234
 real = 3.14
 string1 = "Case 1"
 string2 = 'Case 2'
-multivalue[] = "first"
-multivalue[] = 'second'
-
+multivalue[] = "first"   # in-line comments
+multivalue[] = 'second'  # are supported as well
 
 ; Section: SectionTwo
 [SectionTwo]
@@ -79,6 +78,11 @@ Reading config from an .ini `string` **with sections** <sub>(For section-less fe
 ```javascript 1.8
 var string = '',
     conf   = configIni.parse(string);
+
+    console.log(conf.SectionOne.integer).toBe(1234);
+    console.log(typeof conf.SectionOne.integer).toBe('number');
+    console.log(typeof conf.SectionTwo).toBe('object');
+    console.log(conf.SectionTwo.real).toBe(3.14);
 ```
 [&laquo; back to list](#examples)
 
@@ -87,7 +91,12 @@ var string = '',
 Reading config from a `file.ini`
 
 ```javascript 1.8
-var conf = configIni.load(file);
+var conf = configIni.load('/yourFull/path/to/file.ini');
+
+    console.log(conf.SectionOne.integer).toBe(1234);
+    console.log(typeof conf.SectionOne.integer).toBe('number');
+    console.log(typeof conf.SectionTwo).toBe('object');
+    console.log(conf.SectionTwo.real).toBe(3.14);
 ```
 
 [&laquo; back to list](#examples)
