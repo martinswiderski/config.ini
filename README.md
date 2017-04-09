@@ -27,6 +27,38 @@ var configIni = require('config.ini');
 ```
 
 #### Examples
+Assuming following `.ini file` structure
+
+```bash
+
+# A comment
+; This is a comment too 
+
+[SectionOne]
+
+key = "value"
+integer = 1234
+real = 3.14
+string1 = "Case 1"
+string2 = 'Case 2'
+multivalue[] = "first"
+multivalue[] = 'second'
+
+
+; Section: SectionTwo
+[SectionTwo]
+
+key = new value
+integer = 1234
+real = 3.14
+string1 = Case 1
+string2 = Case 2
+string3 = Case 3
+multivalue[] = first
+multivalue[] = second
+multivalue[] = third
+
+```
 
 1. Reading config from an .ini `string` **with sections** <sub>(For section-less feature see: [#2](https://github.com/martinswiderski/config.ini/issues/2))</sub>
 
