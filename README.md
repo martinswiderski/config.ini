@@ -80,10 +80,14 @@ var string = '',
     conf   = configIni.parse(string);
 
     /// (...)
-    console.log(conf.SectionOne.integer).toBe(1234);
-    console.log(typeof conf.SectionOne.integer).toBe('number');
-    console.log(typeof conf.SectionTwo).toBe('object');
-    console.log(conf.SectionTwo.real).toBe(3.14);
+    console.log(conf.SectionOne.integer);
+    // 1234
+    console.log(typeof conf.SectionOne.integer);
+    // 'number'
+    console.log(typeof conf.SectionTwo);
+    // 'object'
+    console.log(conf.SectionTwo.real);
+    // 3.14
     /// (...)
 ```
 [&laquo; back to list](#examples)
@@ -96,10 +100,14 @@ Reading config from a `file.ini`
 var conf = configIni.load('/yourFull/path/to/file.ini');
 
     /// (...)
-    console.log(conf.SectionOne.integer).toBe(1234);
-    console.log(typeof conf.SectionOne.integer).toBe('number');
-    console.log(typeof conf.SectionTwo).toBe('object');
-    console.log(conf.SectionTwo.real).toBe(3.14);
+    console.log(conf.SectionOne.integer);
+    // 1234
+    console.log(typeof conf.SectionOne.integer);
+    // 'number'
+    console.log(typeof conf.SectionTwo);
+    // 'object'
+    console.log(conf.SectionTwo.real);
+    // 3.14
     /// (...)
 ```
 
