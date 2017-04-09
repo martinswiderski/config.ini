@@ -1,6 +1,6 @@
 {
   "name": "config.ini",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "your .ini files parser with some extras ",
   "main": "index.js",
   "scripts": {
