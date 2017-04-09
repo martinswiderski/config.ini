@@ -1,13 +1,7 @@
-var color = require('bash-color');
+'use strict';
 
-console.log(
-    'This is ' + 
-    color.wrap('placeholder', color.colors.RED, color.styles.bold) +
-    ' only!'
-);
-console.log(
-    'functional releases >= ' + 
-    color.wrap('0.0.2', color.colors.GREEN, color.styles.bold)
-);
-console.log('');
-process.exit(1);
+(function(){
+    module.exports = function (input) {
+        return new (require('./src/parser'));
+    };
+})();

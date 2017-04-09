@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "aliases": "alias jasmine-node=./node_modules/.bin/jasmine-node; alias eslint=./node_modules/.bin/eslint; alias istanbul=./node_modules/.bin/istanbul",
+    "prep-tests": "rm -fr reports/; mkdir reports/; mkdir reports/eslint/; mkdir reports/junit/; echo \"Reports\n---\" > reports/README.md; echo \"Unit tests results\n---\" > reports/junit/README.md;  echo \"eslint results\n---\" > reports/eslint/README.md",
     "_eslint": "npm run aliases; OUT='./reports/eslint/eslint.txt'; date > $OUT; eslint src/*.js >> $OUT; eslint ./index.js >> $OUT; eslint tests/specs/*.js >> $OUT; echo \"DONE!\"",
     "_junit": "npm run prep-tests; npm run aliases; jasmine-node --junitreport --growl tests/specs/; mv reports/*.xml reports/junit/; git checkout tests/props/*.*",
     "_coverage": "rm -fr reports/coverage/; npm run aliases; istanbul cover --include-all-sources -x \"**src/tool/**\" jasmine-node tests/specs/; rm -fr reports/coverage/; mv coverage reports/; git checkout tests/props/*.*",
@@ -33,7 +34,8 @@
   },
   "homepage": "https://github.com/martinswiderski/config.ini#readme",
   "dependencies": {
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "md5-file": "^3.1.1"
   },
   "devDependencies": {
     "bash-color": "0.0.4",
