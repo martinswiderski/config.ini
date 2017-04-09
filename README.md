@@ -125,13 +125,6 @@ var conf = configIni.load('/yourFull/path/to/file.ini');
 key = string
 integer = 1234
 real = 3.14
-' to be '
-; Section: mysection
-[mysection]
-
-key = string
-integer = 1234
-real = 3.14
 '
 
 ```
