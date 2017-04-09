@@ -26,7 +26,15 @@ then inside your code use:
 var configIni = require('config.ini');
 ```
 
-#### Examples
+#### Documentation
+
+ * Example .ini file format
+ * Reading string
+ * Reading from a file
+ * Output to .ini string (you can save it into a file)
+ * I8N Support
+
+
 Assuming following `.ini file` structure
 
 ```bash
