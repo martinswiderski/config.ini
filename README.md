@@ -133,4 +133,35 @@ real = 3.14
 
 #### <a name="i8n"></a>I8N Support
 
+For the `.ini` file as follows:
+
+```bash
+[Japan]
+miyamoto_musashi = "宮本武蔵"
+
+[Germany]
+gebhard_von_bluecher = "Gebhard-Leberecht von Blücher Fürst von Wahlstatt"
+
+[ME]
+salah_ad_din = "صلاحالدينيوسفبنأيوب"
+```
+
+we are getting back following object:
+
+```javascript 1.8
+console.log(
+    {
+        Japan: {
+            miyamoto_musashi: '宮本武蔵'
+        },
+        Germany: {
+            gebhard_von_bluecher: 'Gebhard-Leberecht von Blücher Fürst von Wahlstatt'
+        },
+        ME: {
+            salah_ad_din: 'صلاحالدينيوسفبنأيوب'
+        }
+    }
+);
+```
+
 [&laquo; back to list](#examples)
