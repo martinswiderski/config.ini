@@ -79,10 +79,12 @@ Reading config from an .ini `string` **with sections** <sub>(For section-less fe
 var string = '',
     conf   = configIni.parse(string);
 
+    /// (...)
     console.log(conf.SectionOne.integer).toBe(1234);
     console.log(typeof conf.SectionOne.integer).toBe('number');
     console.log(typeof conf.SectionTwo).toBe('object');
     console.log(conf.SectionTwo.real).toBe(3.14);
+    /// (...)
 ```
 [&laquo; back to list](#examples)
 
@@ -93,15 +95,46 @@ Reading config from a `file.ini`
 ```javascript 1.8
 var conf = configIni.load('/yourFull/path/to/file.ini');
 
+    /// (...)
     console.log(conf.SectionOne.integer).toBe(1234);
     console.log(typeof conf.SectionOne.integer).toBe('number');
     console.log(typeof conf.SectionTwo).toBe('object');
     console.log(conf.SectionTwo.real).toBe(3.14);
+    /// (...)
 ```
 
 [&laquo; back to list](#examples)
 
 #### <a name="output"></a>Output to an .ini string
+
+```javascript 1.8
+
+    var objToIniString = {
+        mysection: {
+            key: "string",
+            integer: 1234,
+            real: 3.14
+        }
+    };
+
+    console.log(configIni.stringify(objToIniString));
+'
+; Section: mysection
+[mysection]
+
+key = string
+integer = 1234
+real = 3.14
+' to be '
+; Section: mysection
+[mysection]
+
+key = string
+integer = 1234
+real = 3.14
+'
+
+```
 
 [&laquo; back to list](#examples)
 
