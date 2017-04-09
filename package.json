@@ -4,7 +4,11 @@
   "description": "your .ini files parser with some extras ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no tests - this is placeholder publish\" && exit 1"
+    "aliases": "alias jasmine-node=./node_modules/.bin/jasmine-node; alias eslint=./node_modules/.bin/eslint; alias istanbul=./node_modules/.bin/istanbul",
+    "_eslint": "npm run aliases; OUT='./reports/eslint/eslint.txt'; date > $OUT; eslint src/*.js >> $OUT; eslint ./index.js >> $OUT; eslint tests/specs/*.js >> $OUT; echo \"DONE!\"",
+    "_junit": "npm run prep-tests; npm run aliases; jasmine-node --junitreport --growl tests/specs/; mv reports/*.xml reports/junit/; git checkout tests/props/*.*",
+    "_coverage": "rm -fr reports/coverage/; npm run aliases; istanbul cover --include-all-sources -x \"**src/tool/**\" jasmine-node tests/specs/; rm -fr reports/coverage/; mv coverage reports/; git checkout tests/props/*.*",
+    "test": "npm run prep-tests; npm run aliases; echo\"\"; echo \"Running all tests...\"; echo \"\"; jasmine-node --growl tests/specs/"
   },
   "repository": {
     "type": "git",
