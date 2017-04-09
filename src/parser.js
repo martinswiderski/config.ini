@@ -89,7 +89,7 @@ function readline(line) {
     return out;
 }
 
-function parseString(input) {
+function parseIniString(input) {
     var out = {}, details = {},
         currentSection = '',
         lines = input.split('\n');
@@ -119,71 +119,17 @@ function parseString(input) {
     return out;
 }
 
-function Parser(id, parent) {
+function toIniString(ob) {
 
-    var _store = {},
-        _id = id,
-        _parent = parent,
-        _errors = [];
-
-    this.encoding = function() {
-        return _defaultEncoding;
-    };
-
-    this.new = function() {
-        return new Parser(++_i, _id); // creates child
-    };
-
-    this.id = function() {
-        return _id;
-    };
-
-    this.parent = function() {
-        return _parent;
-    };
-
-    this.errors = function() {
-        return JSON.parse(JSON.stringify(_errors));
-    };
-
-    this.parse = function(string) {
-        return _store = parseString(string);
-    };
-
-    this.load = function(file) {
-        try {
-            return _store = parseString(
-                fs.readFileSync(
-                    file,
-                    this.encoding()
-                )
-            );
-        } catch (err) {
-            _errors.push(err.message);
-            return {};
-        }
-    };
-
-    this.stringify = function(indent, quote) {
-    };
-
-    /**
-     *
-     * @param object|undefined ob Latter reads self-storage
-     * @returns string
-     */
-    this.toJSON = function(ob) {
-        ob = (typeof ob === 'undefined') ? _store : ob;
-        var _out = '';
-        if (typeof ob !== 'object') {
-            return '{}';
-        } else {
-            _out = JSON.stringify(ob);
-            return (_out.substr(0, 1) === '{' && _out.substr((_out.length-1), 1) === '}')
-                ? _out : '{}';
-        }
-    };
-
+    return '{}';
 }
 
-module.exports = new Parser;
+module.exports = {
+    encoding: function () { return _defaultEncoding; },
+    load: function(file) {
+        return false;
+    },
+    parse: parseIniString,
+    stringify: toIniString,
+    version: function
+};
