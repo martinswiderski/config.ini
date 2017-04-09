@@ -62,5 +62,12 @@ multivalue[] = third
 
 1. Reading config from an .ini `string` **with sections** <sub>(For section-less feature see: [#2](https://github.com/martinswiderski/config.ini/issues/2))</sub>
 
+```javascript 1.8
+var string = '',
+    conf   = configIni.parse(string);
+```
 2. Reading config from a `file.ini`
 
+```javascript 1.8
+var conf = configIni.load(file);
+```
