@@ -10,7 +10,7 @@ describe('Reads object', function () {
         expect(typeof conf).toBe('object');
         expect(typeof conf.SectionOne).toBe('object');
     });
-    it('outputs into a string', function () {
+    it('outputs into a string from INI', function () {
         expect(typeof configIni.stringify(conf)).toBe('string');
         expect(configIni.stringify(conf))
             .toBe([
@@ -44,6 +44,28 @@ describe('Reads object', function () {
     });
     it('Data in JSON is identical', function () {
         expect(JSON.stringify(restored)).toBe(JSON.stringify(conf));
+    });
+
+    var objToIniString = {
+        mysection: {
+            key: "string",
+            integer: 1234,
+            real: 3.14
+        }
+    };
+
+    it('outputs into a string from Javascript object', function () {
+        expect(typeof configIni.stringify(objToIniString)).toBe('string');
+        expect(configIni.stringify(objToIniString)).toBe([
+            '',
+            '; Section: mysection',
+            '[mysection]',
+            '',
+            'key = string',
+            'integer = 1234',
+            'real = 3.14',
+            ''
+        ].join('\n'));
     });
 });
 
