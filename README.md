@@ -18,7 +18,7 @@ Version|Published|By|URL
 #### Installation
 
 ```bash
-npm install --save config,ini
+npm install --save config.ini
 ```
 #### In your code...
 
