@@ -16,7 +16,8 @@ if (!String.prototype.dequote) {
     };
 }
 
-var _md5             = require('md5-file'),
+var _jsesc           = require('jsesc'),
+    _md5             = require('md5-file'),
     fs               = require('fs'),
     _classMd5        = _md5.sync(__filename),
     _defaultEncoding = 'utf-8',
@@ -120,6 +121,9 @@ function parse(input) {
         } else {
             ++_loop;
             details = readline(lines[i]);
+            if (details.key) {
+                details.key = details.key.trim();
+            }
             if (details.type === 'section') {
                 currentSection = details.key;
                 out[currentSection] = {};
@@ -132,7 +136,6 @@ function parse(input) {
                 out[currentSection][details.key].push(details.value);
             } else if (details.type === 'empty') {
                 _loop=_loop-1;
-                //console.log(details);
             } else {
                 throw new Error('Invalid line data type type in line no. ' + i);
             }
@@ -142,12 +145,33 @@ function parse(input) {
     return (_loop > 0) ? out : false;
 }
 
+var _jsescOpt = {
+    quotes: 'double'
+};
+
+function number(input) {
+    return (1*input === parseFloat(input)) || (1*input === parseInt(input));
+}
+
+function escapeQuotes(string, options) {
+    if (number(string) === true) {
+        return string;
+    } else {
+        options = (typeof options !== 'undefined')
+            ? options
+            : _jsescOpt;
+        return '"' + _jsesc(string, options) + '"';
+    }
+}
+
 /**
  * Turns object to .ini string
  * @param object ob
+ * @param bool   escape
  * @returns string|false
  */
-function stringify(ob) {
+function stringify(ob, escape) {
+    escape = (typeof escape !== 'boolean') ? false : escape;
     var _out = [], key, value;
     for (var k in ob) {
         if (typeof k === 'string' && typeof ob[k] === 'object') {
@@ -158,10 +182,18 @@ function stringify(ob) {
             for (key in ob[k]) {
                 value = ob[k][key];
                 if (!value.push) {
-                    _out.push(key + ' = ' + value);
+                    if (escape === true) {
+                        _out.push(key + ' = ' + escapeQuotes(value));
+                    } else {
+                        _out.push(key + ' = ' + value);
+                    }
                 } else {
                     for (var c in value) {
-                        _out.push(key + '[] = ' + value[c]);
+                        if (escape === true) {
+                            _out.push(key + '[] = ' + escapeQuotes(value[c]));
+                        } else {
+                            _out.push(key + '[] = ' + value[c]);
+                        }
                     }
                 }
             }
@@ -238,5 +270,7 @@ module.exports = {
     encoding: getEncoding,
     load: load,
     parse: parse,
+    escape: escapeQuotes,
+    escapeOpt: _jsescOpt,
     stringify: stringify
 };
