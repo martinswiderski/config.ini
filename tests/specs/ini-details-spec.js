@@ -5,7 +5,7 @@ var configIni = require('./../../index');
 describe('Object has basic sanity checks built-in', function () {
     it('md5', function () {
         expect(configIni.md5())
-            .toBe('05493b214cb06377ce486cd3d7aa5d9d');
+            .toBe('7b860a256fc4817af2443b2fc0a5267e');
     });
     it('version', function () {
         expect(configIni.version())

@@ -47,12 +47,13 @@ describe('Reads object', function () {
     });
 
     var objToIniString = {
-        mysection: {
-            key: 'string',
-            integer: 1234,
-            real: 3.14
-        }
-    };
+            mysection: {
+                key: 'Jake\'s favourite book is "Gone with the wind"',
+                integer: 1234,
+                real: 3.14
+            }
+        },
+        fromFileIni = configIni.load(__dirname + '/../props/escaped.ini');
 
     it('outputs into a string from Javascript object', function () {
         expect(typeof configIni.stringify(objToIniString)).toBe('string');
@@ -61,7 +62,35 @@ describe('Reads object', function () {
             '; Section: mysection',
             '[mysection]',
             '',
-            'key = string',
+            'key = Jake\'s favourite book is "Gone with the wind"',
+            'integer = 1234',
+            'real = 3.14',
+            ''
+        ].join('\n'));
+    });
+
+    it('outputs into a string from Javascript object w. quote escape', function () {
+        expect(typeof configIni.stringify(objToIniString, true)).toBe('string');
+        expect(configIni.stringify(objToIniString, true)).toBe([
+            '',
+            '; Section: mysection',
+            '[mysection]',
+            '',
+            'key = "Jake\'s favourite book is \\\"Gone with the wind\\\"\"',
+            'integer = 1234',
+            'real = 3.14',
+            ''
+        ].join('\n'));
+    });
+
+    it('outputs read from file to string w. quote escape', function () {
+        expect(typeof configIni.stringify(fromFileIni, true)).toBe('string');
+        expect(configIni.stringify(fromFileIni, true)).toBe([
+            '',
+            '; Section: mysection',
+            '[mysection]',
+            '',
+            'key = "Jake\'s favourite book is \\\"Gone with the wind\\\"\"',
             'integer = 1234',
             'real = 3.14',
             ''
