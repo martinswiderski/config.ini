@@ -9,7 +9,7 @@
     "_eslint": "npm run aliases; OUT='./reports/eslint/eslint.txt'; date > $OUT; eslint src/*.js >> $OUT; eslint ./index.js >> $OUT; eslint tests/specs/*.js >> $OUT; echo \"DONE!\"",
     "_junit": "npm run prep-tests; npm run aliases; jasmine-node --junitreport --growl tests/specs/; mv reports/*.xml reports/junit/; git checkout tests/props/*.*",
     "_coverage": "rm -fr reports/coverage/; npm run aliases; istanbul cover --include-all-sources -x \"**src/tool/**\" jasmine-node tests/specs/; rm -fr reports/coverage/; mv coverage reports/; git checkout tests/props/*.*",
-    "test": "npm run prep-tests; npm run aliases; echo\"\"; echo \"Running all tests...\"; echo \"\"; jasmine-node --growl tests/specs/"
+    "test": "./node_modules/.bin/jasmine-node --growl tests/specs/"
   },
   "repository": {
     "type": "git",
