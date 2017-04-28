@@ -4,7 +4,7 @@ config.ini
 **your `.ini` files parser with some extras**
 
 
-[![MIT License](https://raw.githubusercontent.com/martinswiderski/config.ini/master/mit-license.png)](LICENSE) [![Build Status](https://travis-ci.org/martinswiderski/config.ini.svg?branch=master)](https://travis-ci.org/martinswiderski/config.ini) [![npm version](https://badge.fury.io/js/config.ini.svg)](https://www.npmjs.com/package/config.ini) [![Build](https://ci.appveyor.com/api/projects/status/github/martinswiderski/config.ini)](https://ci.appveyor.com/project/martinswiderski/config-ini)
+[![MIT License](https://raw.githubusercontent.com/martinswiderski/config.ini/master/mit-license.png)](LICENSE) [![Build Status](https://travis-ci.org/martinswiderski/config.ini.svg?branch=master)](https://travis-ci.org/martinswiderski/config.ini) [![npm version](https://badge.fury.io/js/config.ini.svg)](https://www.npmjs.com/package/config.ini) [![Build](https://ci.appveyor.com/api/projects/status/github/martinswiderski/config.ini?branch=master&svg=true&pendingText=Windows%20...&failingText=Windows%20failed&passingText=Windows%20OK)](https://ci.appveyor.com/project/martinswiderski/config-ini)
 
 
 ### Version
