@@ -121,25 +121,30 @@ function parse(input) {
         } else {
             ++_loop;
             details = readline(lines[i]);
-            if (details.key) {
-                details.key = details.key.trim();
-            }
-            if (details.type === 'section') {
-                currentSection = details.key;
-                out[currentSection] = {};
-            } else if (details.type === 'item') {
-                out[currentSection][details.key] = details.value;
-            } else if (details.type === 'multi-value') {
-                if (!out[currentSection][details.key]) {
-                    out[currentSection][details.key] = []; // create array
+
+            if (typeof details.value !== 'function') {
+                if (details.key) {
+                    details.key = details.key.trim();
                 }
-                out[currentSection][details.key].push(details.value);
-            } else if (details.type === 'empty') {
-                _loop=_loop-1;
-            } else {
-                throw new Error('Invalid line data type type in line no. ' + i);
+                if (details.type === 'section') {
+                    currentSection = details.key;
+                    out[currentSection] = {};
+                } else if (details.type === 'item') {
+                    out[currentSection][details.key] = details.value;
+                } else if (details.type === 'multi-value') {
+                    if (!out[currentSection][details.key]) {
+                        out[currentSection][details.key] = []; // create array
+                    }
+                    if (typeof details.value !== 'function') {
+                        out[currentSection][details.key].push(details.value);
+                    }
+                } else if (details.type === 'empty') {
+                    _loop=_loop-1;
+                } else {
+                    throw new Error('Invalid line data type type in line no. ' + i);
+                }
+                delete lines[i];
             }
-            delete lines[i];
         }
     }
     return (_loop > 0) ? out : false;
