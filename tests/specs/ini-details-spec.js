@@ -9,7 +9,7 @@ describe('Object has basic sanity checks built-in', function () {
     });
     it('version', function () {
         expect(configIni.version())
-            .toBe('0.1.0');
+            .toBe('0.0.52');
     });
     it('encoding', function () {
         expect(configIni.encoding()).toBe('utf-8');
