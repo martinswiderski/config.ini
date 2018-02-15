@@ -16,23 +16,49 @@ if (!String.prototype.dequote) {
     };
 }
 
-var _jsesc           = require('jsesc'),
-    _md5             = require('md5-file'),
+var config           = require('./config'),
+    jsesc            = require('jsesc'),
+    md5file          = require('md5-file'),
     fs               = require('fs'),
-    _classMd5        = _md5.sync(__filename),
-    _defaultEncoding = 'utf-8',
-    _ignore          = {
+    md5class         = md5file.sync(__filename),
+    defaultEncoding  = 'utf-8',
+    ignore           = {
         ';': true,
         '#': true
     };
 
+
+function isString(input) {
+    return typeof input.trim === 'function';
+}
+
+function isFunction(subject) {
+    return 'function' === typeof subject;
+}
+
+function isFile(path) {
+    if (!isString(path)) {
+        return false;
+    } else {
+        if (fs.existsSync(path)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+function isNumber(input) {
+    return (1*input === parseFloat(input)) || (1*input === parseInt(input));
+}
+
 /**
- * Checks if line is "empty"
+ * Checks if line is "empty" or comment
  * @param string line Input
  * @returns boolean
  */
 function isEmpty(line) {
-    return (line.length === 0 || _ignore[line.substr(0, 1)] === true);
+    return (line.length === 0 || ignore[line.substr(0, 1)] === true);
 }
 
 /**
@@ -43,7 +69,7 @@ function isEmpty(line) {
 function sanitize(string) {
     var out = [], val;
     for (var c=0; c<string.length; c++) {
-        if (_ignore[string[c]]) {
+        if (ignore[string[c]]) {
             break;
         }
         out.push(string[c]);
@@ -121,46 +147,47 @@ function parse(input) {
         } else {
             ++_loop;
             details = readline(lines[i]);
-            if (details.key) {
-                details.key = details.key.trim();
-            }
-            if (details.type === 'section') {
-                currentSection = details.key;
-                out[currentSection] = {};
-            } else if (details.type === 'item') {
-                out[currentSection][details.key] = details.value;
-            } else if (details.type === 'multi-value') {
-                if (!out[currentSection][details.key]) {
-                    out[currentSection][details.key] = []; // create array
+
+            if (typeof details.value !== 'function') {
+                if (details.key) {
+                    details.key = details.key.trim();
                 }
-                out[currentSection][details.key].push(details.value);
-            } else if (details.type === 'empty') {
-                _loop=_loop-1;
-            } else {
-                throw new Error('Invalid line data type type in line no. ' + i);
+                if (details.type === 'section') {
+                    currentSection = details.key;
+                    out[currentSection] = {};
+                } else if (details.type === 'item') {
+                    out[currentSection][details.key] = details.value;
+                } else if (details.type === 'multi-value') {
+                    if (!out[currentSection][details.key]) {
+                        out[currentSection][details.key] = []; // create array
+                    }
+                    if (typeof details.value !== 'function') {
+                        out[currentSection][details.key].push(details.value);
+                    }
+                } else if (details.type === 'empty') {
+                    _loop=_loop-1;
+                } else {
+                    throw new Error('Invalid line data type type in line no. ' + i);
+                }
+                delete lines[i];
             }
-            delete lines[i];
         }
     }
     return (_loop > 0) ? out : false;
 }
 
-var _jsescOpt = {
+var jsescOpt = {
     quotes: 'double'
 };
 
-function number(input) {
-    return (1*input === parseFloat(input)) || (1*input === parseInt(input));
-}
-
 function escapeQuotes(string, options) {
-    if (number(string) === true) {
+    if (isNumber(string) === true) {
         return string;
     } else {
         options = (typeof options !== 'undefined')
             ? options
-            : _jsescOpt;
-        return '"' + _jsesc(string, options) + '"';
+            : jsescOpt;
+        return '"' + jsesc(string, options) + '"';
     }
 }
 
@@ -181,7 +208,7 @@ function stringify(ob, escape) {
             _out.push('');
             for (key in ob[k]) {
                 value = ob[k][key];
-                if (!value.push) {
+                if (!value.push && !isFunction(value)) {
                     if (escape === true) {
                         _out.push(key + ' = ' + escapeQuotes(value));
                     } else {
@@ -189,10 +216,12 @@ function stringify(ob, escape) {
                     }
                 } else {
                     for (var c in value) {
-                        if (escape === true) {
-                            _out.push(key + '[] = ' + escapeQuotes(value[c]));
-                        } else {
-                            _out.push(key + '[] = ' + value[c]);
+                        if (!isFunction(value[c])) {
+                            if (escape === true) {
+                                _out.push(key + '[] = ' + escapeQuotes(value[c]));
+                            } else {
+                                _out.push(key + '[] = ' + value[c]);
+                            }
                         }
                     }
                 }
@@ -225,6 +254,9 @@ function nvl(val, fallback) {
  */
 function load(file, encoding) {
     try {
+        if (!isFile(file)) {
+            throw new Error('Not a file');
+        }
         return parse(
             fs.readFileSync(
                 file,
@@ -243,9 +275,9 @@ function load(file, encoding) {
  */
 function getEncoding(newValue) {
     if (typeof newValue !== 'undefined' && typeof newValue === 'string') {
-        _defaultEncoding = newValue;
+        defaultEncoding = newValue;
     }
-    return _defaultEncoding;
+    return defaultEncoding;
 }
 
 /**
@@ -253,7 +285,7 @@ function getEncoding(newValue) {
  * @return string
  */
 function version() {
-    return require('./config').version;
+    return config.version;
 }
 
 /**
@@ -261,7 +293,7 @@ function version() {
  * @return string
  */
 function md5() {
-    return _classMd5;
+    return md5class;
 }
 
 module.exports = {
@@ -271,6 +303,6 @@ module.exports = {
     load: load,
     parse: parse,
     escape: escapeQuotes,
-    escapeOpt: _jsescOpt,
+    escapeOpt: jsescOpt,
     stringify: stringify
 };
