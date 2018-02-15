@@ -5,11 +5,11 @@ var configIni = require('./../../index');
 describe('Object has basic sanity checks built-in', function () {
     it('md5', function () {
         expect(configIni.md5())
-            .toBe('7b860a256fc4817af2443b2fc0a5267e');
+            .toBe('19bf27ddb320044782ef3213b7146051');
     });
     it('version', function () {
         expect(configIni.version())
-            .toBe('0.0.51');
+            .toBe('0.1.0');
     });
     it('encoding', function () {
         expect(configIni.encoding()).toBe('utf-8');
