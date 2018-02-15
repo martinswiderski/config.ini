@@ -1,8 +1,11 @@
 'use strict';
 
+var pck = require('./../package');
+
 module.exports = {
-    name: 'config.ini',
-    version: '0.0.52',
+    package: pck,
+    name: pck.name,
+    version: pck.version,
     published: '2018-02-15',
     readme: 'README.md',
     package: 'package.json'
