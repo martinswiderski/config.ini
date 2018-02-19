@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/martinswiderski/config.ini#readme",
   "dependencies": {
+    "cryptr": "^3.0.0",
     "fs": "0.0.1-security",
     "jsesc": "^2.5.0",
     "md5-file": "^3.1.1",

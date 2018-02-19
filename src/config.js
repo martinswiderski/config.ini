@@ -1,8 +1,10 @@
 'use strict';
 
-var pck = require('./../package');
+var nvl = require('./nvl'),
+    pck = require('./../package');
 
 module.exports = {
+    encrypt_key: nvl(process.env['CONFIG_INI_ENCRYPT_KEY'], 'Es irrt der Mensch so lang er strebt'),
     package: pck,
     name: pck.name,
     version: pck.version,

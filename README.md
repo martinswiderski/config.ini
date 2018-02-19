@@ -33,6 +33,7 @@ var configIni = require('config.ini');
  * [Reading from a file](#file)
  * [Output to .ini string (you can save it into a file)](#output)
  * [I8N Support](#i8n)
+ * [Encrypt/decrypt values](#encode)
 
 
 #### <a name="ini"></a>Example format
@@ -171,6 +172,24 @@ console.log(
     }
 );
 ```
+#### <a name="encode"></a>Encode/Decode
+
+If environment variable `CONFIG_INI_SECRET_KEY` is defined in the system
+your `.ini` files and strings can be `encrypted` and `decrypted`.
+For example files wrapped with **key**: **ThisIsSecret!T377No0ne**
+file that is looking like this in encoded form:
+
+```
+wrapped file
+```
+
+would be decoded to:
+
+```
+unwrapped
+```
+
+Please see the [unit test](./tests/specs/wrap-unwrap-spec.js) for working code examples.
 
 [&laquo; back to list](#examples)
 
