@@ -37,6 +37,7 @@
     "fs": "0.0.1-security",
     "jsesc": "^2.5.0",
     "md5-file": "^3.1.1",
+    "npm": "^6.4.1",
     "validator": "^9.4.0"
   },
   "devDependencies": {
