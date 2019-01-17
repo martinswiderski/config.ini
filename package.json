@@ -35,6 +35,7 @@
   "homepage": "https://github.com/martinswiderski/config.ini#readme",
   "dependencies": {
     "fs": "0.0.1-security",
+    "growl": ">=1.10.0",
     "jsesc": "^2.5.0",
     "md5-file": "^3.1.1",
     "npm": "^6.4.1",
