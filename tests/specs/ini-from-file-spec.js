@@ -14,6 +14,7 @@ describe('Reads object from a file', function () {
         expect(typeof configIni.load(file).SectionTwo.real).toBe('number');
     });
     it('incorrectly formatted or non-existing .ini file', function () {
+        expect(configIni.load({t: 1})).toBe(false);
         expect(configIni.load('/tmp/BSS')).toBe(false);
         expect(typeof configIni.load('/tmp/BSS')).toBe('boolean');
     });
