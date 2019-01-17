@@ -11,7 +11,7 @@ config.ini
 
 Version|Published|By|URL
 --- | --- | --- | ---
-**0.0.51** | **2017-04-15** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
+**0.0.55** | **2019-01-17** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
 
 ### How to use it
 
