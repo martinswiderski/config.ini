@@ -23,8 +23,6 @@ require('./../../src/sign-test')(__dirname+'/nvl-spec.js', mockConsole);
 
 describe('console can be injected', function () {
     it('string contains a valid MD5', function () {
-        expect(mockConsole.captured().contains('e0d52f79a510ff64e465e2a595ba2468')).toBe(true);
+        expect(mockConsole.captured().contains('0bd4ae6bc8b36349e663fe0baf21fe5b')).toBe(true);
     });
 });
-
-
