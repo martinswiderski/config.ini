@@ -11,7 +11,7 @@ config.ini
 
 Version|Published|By|URL
 --- | --- | --- | ---
-**0.0.56** | **2019-05-04** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
+**0.0.60** | **2019-08-11** | `codebloke` | [npm](https://www.npmjs.com/package/config.ini)
 
 ### How to use it
 
@@ -42,7 +42,7 @@ For all examples below we are assuming following `.ini file` structure
 ```bash
 
 # A comment
-; This is a comment too 
+; This is a comment too
 
 [SectionOne]
 
@@ -173,4 +173,3 @@ console.log(
 ```
 
 [&laquo; back to list](#examples)
-
