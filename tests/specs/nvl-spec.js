@@ -19,3 +19,4 @@ describe('nvl', function () {
         expect(nvl(udf, 'fallback')).toBe('fallback');
     });
 });
+

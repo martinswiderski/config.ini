@@ -1,9 +1,10 @@
 {
   "name": "config.ini",
-  "version": "0.0.56",
+  "version": "0.0.60",
   "description": "your .ini files parser with some extras ",
   "main": "index.js",
   "scripts": {
+    "clean-install": "rm package-lock.*; rm -fr node_modules; npm install; npm shrinkwrap",
     "aliases": "alias jasmine-node=./node_modules/.bin/jasmine-node; alias eslint=./node_modules/.bin/eslint; alias istanbul=./node_modules/.bin/istanbul",
     "prep-tests": "rm -fr reports/; mkdir reports/; mkdir reports/eslint/; mkdir reports/junit/; echo \"Reports\n---\" > reports/README.md; echo \"Unit tests results\n---\" > reports/junit/README.md;  echo \"eslint results\n---\" > reports/eslint/README.md",
     "_eslint": "npm run aliases; OUT='./reports/eslint/eslint.txt'; date > $OUT; eslint src/*.js >> $OUT; eslint ./index.js >> $OUT; eslint tests/specs/*.js >> $OUT; echo \"DONE!\"",
@@ -35,16 +36,16 @@
   "homepage": "https://github.com/martinswiderski/config.ini#readme",
   "dependencies": {
     "fs": "0.0.1-security",
-    "growl": ">=1.10.0",
-    "jsesc": "^2.5.0",
-    "md5-file": "^3.1.1",
-    "npm": "^6.4.1",
-    "validator": "^9.4.0"
+    "growl": "^1.10.5",
+    "jsesc": "^2.5.2",
+    "md5-file": "^4.0.0",
+    "npm": "^6.10.3",
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "bash-color": "0.0.4",
-    "eslint": "3.19.0",
-    "istanbul": "0.4.5",
-    "jasmine-node": "1.14.5"
+    "eslint": "^6.1.0",
+    "istanbul": "^0.4.5",
+    "jasmine-node": "^3.0.0"
   }
 }
