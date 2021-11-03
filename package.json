@@ -40,7 +40,7 @@
     "jsesc": "^2.5.2",
     "md5-file": "^4.0.0",
     "npm": "^6.10.3",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "bash-color": "0.0.4",
